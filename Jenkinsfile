@@ -24,7 +24,7 @@ pipeline {
    stage('Docker Build') {
     	agent any
       steps {
-      	sh 'docker build .'
+      	sh 'sudo docker build .'
       }
     }
     
