@@ -25,7 +25,7 @@ pipeline {
       steps {
       	//sh 'docker build . -t hello-micro-service'
       	script{
-      	app = docker.build("hello-micro-service")
+      	app = docker.build("hello-micro-service:${env.BUILD_ID}")
       	}
       }
     }
