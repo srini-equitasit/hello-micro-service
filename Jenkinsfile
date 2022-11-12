@@ -59,9 +59,7 @@ pipeline {
     
     stage ('Deploy') {
       steps {
-      script{
-
-       }
+     
        echo 'image deployed test message'
       }
     }
