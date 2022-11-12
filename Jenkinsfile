@@ -1,3 +1,4 @@
+ def app
 pipeline {
   agent any
   tools { 
@@ -26,7 +27,7 @@ pipeline {
       steps {
       	//sh 'docker build . -t hello-micro-service'
       	script{
-      	 docker.build("hello-micro-service:${env.BUILD_ID}")
+      	 app = docker.build("hello-micro-service:${env.BUILD_ID}")
       	}
       }
     }
@@ -34,7 +35,7 @@ pipeline {
     stage ('Deploy') {
       steps {
       script{
-         docker.push("hello-micro-service:${env.BUILD_ID}")
+        app.push()
        }
        echo 'image pushed'
       }
