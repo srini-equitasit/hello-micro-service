@@ -2,13 +2,15 @@ package com.equitasit.ms.controller;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
-import java.net.InetAddress;
+import java.util.Date;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.equitasit.ms.model.RespData;
+
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
@@ -17,24 +19,27 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 
 	@GetMapping("hello/{user}")
-	public String hello(@PathVariable("user") String user) {
-
+	public RespData hello(@PathVariable("user") String user) {
+		RespData respData = new RespData();
 		log.info("start request ");
-		String message = "";
+
 		try {
 			InetAddress ip = InetAddress.getLocalHost();
-			message += " From Host : " + ip;
+
+			respData.setIpAddr(ip.toString());
+
 		} catch (UnknownHostException e) {
 			log.error("error while getting the ip", e);
 		}
 
-		message = "hello " + user + " serving " + message;
+		respData.setMsg("hello " + user);
+		respData.setDate(new Date());
 
-		log.info("message = " + message);
+		log.info("respData = " + respData);
 
 		log.info("end request ");
 
-		return message;
+		return respData;
 	}
 
 }
