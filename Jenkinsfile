@@ -23,7 +23,8 @@ pipeline {
     
    stage('Docker Build') {
       steps {
-      	sh 'docker build . -t hello-micro-service'
+      	//sh 'docker build . -t hello-micro-service'
+      	app = docker.build("hello-micro-service")
       }
     }
     
