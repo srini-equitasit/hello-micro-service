@@ -4,7 +4,7 @@ pipeline {
         maven 'Maven 3.3.9' 
         jdk 'jdk8' 
   }
-  def app
+
   stages {
   
    stage ('Initialize') {
@@ -26,7 +26,7 @@ pipeline {
       steps {
       	//sh 'docker build . -t hello-micro-service'
       	script{
-      	 app = docker.build("hello-micro-service:${env.BUILD_ID}")
+      	 docker.build("hello-micro-service:${env.BUILD_ID}")
       	}
       }
     }
@@ -34,7 +34,7 @@ pipeline {
     stage ('Deploy') {
       steps {
       script{
-        app.push()
+         docker.push("hello-micro-service:${env.BUILD_ID}")
        }
        echo 'image pushed'
       }
