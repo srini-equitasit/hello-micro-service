@@ -4,6 +4,7 @@ pipeline {
         maven 'Maven 3.3.9' 
         jdk 'jdk8' 
   }
+  def app
   stages {
   
    stage ('Initialize') {
@@ -32,7 +33,9 @@ pipeline {
     
     stage ('Deploy') {
       steps {
-       app.push()
+      script{
+        app.push()
+       }
        echo 'image pushed'
       }
     }
