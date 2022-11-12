@@ -24,7 +24,7 @@ pipeline {
    stage('Docker Build') {
     	agent any
       steps {
-      	def customImage = docker.build("hello-micro-service:${env.BUILD_ID}")
+      	sh 'docker build .'
       }
     }
     
