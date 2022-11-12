@@ -23,7 +23,7 @@ pipeline {
     
    stage('Docker Build') {
       steps {
-      	sh 'docker build . -t hello-micro-service_'${env.BUILD_ID}
+      	sh 'docker build . -t hello-micro-service'
       	//script{
       	//app = docker.build("hello-micro-service:${env.BUILD_ID}")
       	//}
