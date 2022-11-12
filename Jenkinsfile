@@ -32,7 +32,8 @@ pipeline {
     
     stage ('Deploy') {
       steps {
-       echo 'This is yet to deploy.'
+       app.push()
+       echo 'image pushed'
       }
     }
   }
