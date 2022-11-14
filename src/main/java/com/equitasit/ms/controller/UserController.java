@@ -32,7 +32,7 @@ public class UserController {
 			log.error("error while getting the ip", e);
 		}
 
-		respData.setMsg("hello " + user);
+		respData.setMsg("hello from feature 1 branch" + user);
 		respData.setDate(new Date());
 
 		log.info("respData = " + respData);
