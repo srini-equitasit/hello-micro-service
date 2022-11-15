@@ -33,18 +33,19 @@ pipeline {
 
     stage('Sonarqube') {
 
-    environment {
-        scannerHome = tool 'SonarQubeScanner1'
-    }
-    steps {
-        withSonarQubeEnv('SonarQube') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-        timeout(time: 2, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
-        }
-    }
-   }
+      environment {
+          scannerHome = tool 'SonarQubeScanner1'
+      }
+      steps {
+          withSonarQubeEnv('SonarQube') {
+              sh "${scannerHome}/bin/sonar-scanner"
+          }
+          def qualitygate = waitForQualityGate()
+            if (qualitygate.status != "OK") {
+              error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
+            }
+        
+     }
     
    stage('Docker Build') {
       steps {
