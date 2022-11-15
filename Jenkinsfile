@@ -40,11 +40,10 @@ pipeline {
           withSonarQubeEnv('SonarQube') {
               sh "${scannerHome}/bin/sonar-scanner"
           }
-          def qualitygate = waitForQualityGate()
-            if (qualitygate.status != "OK") {
-              error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-            }
-        
+          def qg = waitForQualityGate()
+          if (qg.status != "OK") {
+            error "Pipeline aborted due to quality gate coverage failure: ${qg.status}"
+          }        
      }
     }
    stage('Docker Build') {
