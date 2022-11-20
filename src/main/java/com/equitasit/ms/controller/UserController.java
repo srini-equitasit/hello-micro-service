@@ -1,5 +1,6 @@
 package com.equitasit.ms.controller;
 
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
@@ -24,6 +25,9 @@ public class UserController {
 		log.info("start request ");
 
 		try {
+			InputStream ipStream = this.getClass().getClassLoader().getResourceAsStream("application.properties");
+			System.out.println(ipStream);
+
 			InetAddress ip = InetAddress.getLocalHost();
 
 			respData.setIpAddr(ip.toString());
@@ -31,7 +35,6 @@ public class UserController {
 		} catch (UnknownHostException e) {
 			log.error("error while getting the ip", e);
 		}
-
 
 		respData.setMsg("hello from feature-2 " + user);
 
